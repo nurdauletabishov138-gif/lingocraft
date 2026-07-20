@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏫 SCHOOL CAN BE FUN! — Interactive Worksheet</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito+Sans:wght@600;700&display=swap');
+
+        :root {
+            --bg-color: #f0fdf4;
+            --card-bg: #ffffff;
+            --text-color: #14532d;
+            --primary-color: #22c55e;
+            --secondary-color: #15803d;
+            --accent-color: #facc15;
+            --success-color: #10b981;
+            --border-color: #bbf7d0;
+        }
+
+        * { box-sizing: border-box; }
+        body { background-color: var(--bg-color); font-family: 'Nunito Sans', sans-serif; margin: 0; padding: 20px; color: var(--text-color); display: flex; justify-content: center; }
+        .container { max-width: 850px; width: 100%; background-color: var(--card-bg); border-radius: 24px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); border: 4px solid #ffffff; }
+        header { text-align: center; margin-bottom: 35px; }
+        .header-decor { font-size: 40px; margin-bottom: 10px; }
+        h1 { font-family: 'Baloo 2', cursive; color: var(--secondary-color); margin: 0; font-size: 38px; }
+        .subtitle { color: #166534; font-size: 15px; font-weight: 600; margin-top: 5px; text-transform: uppercase; }
+
+        .meta-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; background-color: #f0fdf4; padding: 20px; border-radius: 16px; margin-bottom: 30px; border: 2px solid var(--border-color); }
+        .meta-item { display: flex; flex-direction: column; }
+        .meta-item label { font-weight: 700; font-size: 13px; color: #166534; margin-bottom: 6px; text-transform: uppercase; }
+        .meta-item input { padding: 10px 12px; border: 2px solid var(--border-color); border-radius: 10px; font-size: 15px; font-weight: 600; outline: none; background: white; }
+        .meta-item input:focus { border-color: var(--secondary-color); }
+
+        .goal-alert { background-color: #f0fdf4; border-left: 6px solid var(--primary-color); padding: 20px; border-radius: 12px; margin-bottom: 35px; display: flex; align-items: center; gap: 15px; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); border-right: 1px solid var(--border-color); }
+        .goal-icon { font-size: 30px; }
+        .goal-text { font-size: 15px; font-weight: 600; line-height: 1.5; margin: 0; }
+
+        .activity-section { background-color: #ffffff; border: 2px solid #bbf7d0; border-radius: 20px; padding: 25px; margin-bottom: 30px; }
+        .activity-header { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; border-bottom: 2px dashed #bbf7d0; padding-bottom: 15px; }
+        .activity-badge { background-color: var(--secondary-color); color: #ffffff; font-weight: 700; padding: 6px 12px; border-radius: 10px; font-size: 12px; text-transform: uppercase; }
+        .activity-title { font-family: 'Baloo 2', cursive; font-weight: 700; font-size: 18px; color: var(--text-color); }
+        .activity-desc { font-size: 14px; color: #166534; margin-bottom: 20px; line-height: 1.5; }
+
+        .text-input { width: 100%; padding: 12px 15px; border: 2px solid #bbf7d0; border-radius: 12px; font-size: 15px; font-weight: 600; outline: none; }
+        .text-input:focus { border-color: var(--secondary-color); box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1); }
+
+        .acrostic-container { display: flex; flex-direction: column; gap: 10px; }
+        .acrostic-row { display: flex; align-items: center; gap: 12px; }
+        .acrostic-char { background-color: var(--primary-color); color: white; width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; }
+
+        .canvas-container { border: 2px solid #bbf7d0; border-radius: 14px; overflow: hidden; background: white; margin-bottom: 15px; }
+        canvas { display: block; width: 100%; height: 220px; cursor: crosshair; }
+        .canvas-tools { display: flex; justify-content: space-between; align-items: center; background-color: #f0fdf4; padding: 10px 15px; border-top: 1px solid #bbf7d0; }
+        .color-palette { display: flex; gap: 8px; }
+        .color-btn { width: 24px; height: 24px; border-radius: 50%; border: 2px solid white; cursor: pointer; box-shadow: 0 0 4px rgba(0,0,0,0.2); }
+        .color-btn.active { transform: scale(1.15); box-shadow: 0 0 0 2px var(--secondary-color); }
+        .btn-clear { background-color: #ef4444; color: white; border: none; padding: 6px 12px; border-radius: 8px; font-size: 12px; font-weight: 700; cursor: pointer; }
+
+        .smiley-table { width: 100%; border-collapse: collapse; }
+        .smiley-table td { padding: 15px 10px; border-bottom: 1px solid #bbf7d0; }
+        .smiley-row { display: flex; gap: 10px; }
+        .smiley-btn { font-size: 24px; background: none; border: none; cursor: pointer; opacity: 0.3; transition: transform 0.2s, opacity 0.2s; }
+        .smiley-btn:hover, .smiley-btn.active { opacity: 1; transform: scale(1.2); }
+
+        .ai-feedback-section { background-color: #f0fdf4; border: 2px solid #bbf7d0; border-radius: 20px; padding: 25px; margin-top: 35px; display: none; }
+        .ai-header { display: flex; align-items: center; gap: 10px; color: #166534; font-weight: 700; margin-bottom: 15px; }
+        .ai-text { font-size: 14px; line-height: 1.6; color: #14532d; white-space: pre-wrap; }
+
+        .btn-submit { background-color: var(--secondary-color); color: white; font-size: 18px; font-weight: 700; border: none; width: 100%; padding: 18px; border-radius: 16px; cursor: pointer; box-shadow: 0 5px 15px rgba(21, 128, 61, 0.2); transition: transform 0.2s, background-color 0.2s; margin-top: 20px; }
+        .btn-submit:hover { background-color: #14532d; transform: translateY(-2px); }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="header-decor">🏫 🎒 📚</div>
+        <h1>SCHOOL CAN BE FUN!</h1>
+        <div class="subtitle">Interactive School Life & Rules Worksheet</div>
+    </header>
+
+    <div class="meta-grid">
+        <div class="meta-item">
+            <label>Name / Ism</label>
+            <input type="text" id="student-name" placeholder="Your name...">
+        </div>
+        <div class="meta-item">
+            <label>Grade / Sinf</label>
+            <input type="text" value="10" id="student-grade" placeholder="Sinf...">
+        </div>
+        <div class="meta-item">
+            <label>Date / Sana</label>
+            <input type="date" id="doc-date">
+        </div>
+    </div>
+
+    <div class="goal-alert">
+        <span class="goal-icon">🏫</span>
+        <p class="goal-text">Invent school-themed idioms, compose school acrostic poems, and sketch your dream school rules with positive digital netiket connectors!</p>
+    </div>
+
+    <!-- ACT 1 -->
+    <div class="activity-section">
+        <div class="activity-header">
+            <span class="activity-badge">Act 1</span>
+            <span class="activity-title">Invent School Idioms</span>
+        </div>
+        <div class="activity-desc">Invent your own non-literal school idiom and explain what it means (e.g., "To read like an open blackboard"):</div>
+        <div style="display:flex; flex-direction:column; gap:12px;">
+            <input type="text" class="text-input" id="idiom-name" placeholder="My school idiom...">
+            <input type="text" class="text-input" id="idiom-meaning" placeholder="Meaning / Tarjimasi...">
+        </div>
+    </div>
+
+    <!-- ACT 2 -->
+    <div class="activity-section">
+        <div class="activity-header">
+            <span class="activity-badge" style="background-color: var(--primary-color);">Act 2</span>
+            <span class="activity-title">Acrostic Poem: S-C-H-O-O-L</span>
+        </div>
+        <div class="activity-desc">Write an encouraging phrase for each letter of SCHOOL:</div>
+        <div class="acrostic-container">
+            <div class="acrostic-row"><div class="acrostic-char">S</div><input type="text" class="text-input" id="ac-s" placeholder="Studies make me grow..."></div>
+            <div class="acrostic-row"><div class="acrostic-char">C</div><input type="text" class="text-input" id="ac-c"></div>
+            <div class="acrostic-row"><div class="acrostic-char">H</div><input type="text" class="text-input" id="ac-h"></div>
+            <div class="acrostic-row"><div class="acrostic-char">O</div><input type="text" class="text-input" id="ac-o"></div>
+            <div class="acrostic-row"><div class="acrostic-char">O</div><input type="text" class="text-input" id="ac-o2"></div>
+            <div class="acrostic-row"><div class="acrostic-char">L</div><input type="text" class="text-input" id="ac-l"></div>
+        </div>
+    </div>
+
+    <!-- ACT 3 -->
+    <div class="activity-section">
+        <div class="activity-header">
+            <span class="activity-badge" style="background-color: var(--accent-color); color: #14532d;">Act 3</span>
+            <span class="activity-title">Sketch Your Dream Classroom</span>
+        </div>
+        <div class="activity-desc">Draw a fun, collaborative zone in your dream school!</div>
+        
+        <div class="canvas-container">
+            <canvas id="school-canvas"></canvas>
+            <div class="canvas-tools">
+                <div class="color-palette">
+                    <div class="color-btn active" style="background-color:#15803d;" data-color="#15803d"></div>
+                    <div class="color-btn" style="background-color:#ef4444;" data-color="#ef4444"></div>
+                    <div class="color-btn" style="background-color:#3b82f6;" data-color="#3b82f6"></div>
+                    <div class="color-btn" style="background-color:#f59e0b;" data-color="#f59e0b"></div>
+                    <div class="color-btn" style="background-color:#1e293b;" data-color="#1e293b"></div>
+                </div>
+                <button class="btn-clear" id="clear-btn">Clear Pad</button>
+            </div>
+        </div>
+        <input type="text" class="text-input" id="school-rule" placeholder="Write one awesome school rule (use connectors: as soon as, so that)...">
+    </div>
+
+    <!-- ACT 4 -->
+    <div class="activity-section">
+        <div class="activity-header">
+            <span class="activity-badge">Act 4</span>
+            <span class="activity-title">Self-Evaluation</span>
+        </div>
+        <table class="smiley-table">
+            <tbody>
+                <tr>
+                    <td style="font-weight:600; font-size:15px;">I enjoy inventing school idioms.</td>
+                    <td>
+                        <div class="smiley-row">
+                            <button class="smiley-btn">😞</button>
+                            <button class="smiley-btn">😐</button>
+                            <button class="smiley-btn">😊</button>
+                            <button class="smiley-btn">🤩</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-weight:600; font-size:15px;">I can design creative rules using proper netiket.</td>
+                    <td>
+                        <div class="smiley-row">
+                            <button class="smiley-btn">😞</button>
+                            <button class="smiley-btn">😐</button>
+                            <button class="smiley-btn">😊</button>
+                            <button class="smiley-btn">🤩</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button class="btn-submit" onclick="submitWorksheet()">Submit & Save Lesson</button>
+
+    <div class="ai-feedback-section" id="ai-panel">
+        <div class="ai-header">
+            <span>🤖</span>
+            <span>AI Teacher's School Life Feedback</span>
+        </div>
+        <div class="ai-text" id="ai-text-box">Generating...</div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('doc-date').valueAsDate = new Date();
+
+    const canvas = document.getElementById('school-canvas');
+    const ctx = canvas.getContext('2d');
+    let drawing = false;
+    let currentColor = '#15803d';
+
+    function resizeCanvas() {
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width;
+        canvas.height = rect.height;
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    canvas.addEventListener('mousedown', startDraw);
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mouseup', stopDraw);
+    canvas.addEventListener('mouseout', stopDraw);
+
+    canvas.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        const touch = e.touches[0];
+        startDraw({ clientX: touch.clientX, clientY: touch.clientY });
+    });
+    canvas.addEventListener('touchmove', (e) => {
+        e.preventDefault();
+        const touch = e.touches[0];
+        draw({ clientX: touch.clientX, clientY: touch.clientY });
+    });
+    canvas.addEventListener('touchend', stopDraw);
+
+    function startDraw(e) {
+        drawing = true;
+        ctx.beginPath();
+        const rect = canvas.getBoundingClientRect();
+        ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+        ctx.strokeStyle = currentColor;
+        ctx.lineWidth = 3;
+        ctx.lineCap = 'round';
+    }
+
+    function draw(e) {
+        if (!drawing) return;
+        const rect = canvas.getBoundingClientRect();
+        ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+        ctx.stroke();
+    }
+
+    function stopDraw() { drawing = false; }
+
+    document.querySelectorAll('.color-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentColor = btn.getAttribute('data-color');
+        });
+    });
+
+    document.getElementById('clear-btn').addEventListener('click', () => {
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    });
+
+    document.querySelectorAll('.smiley-row').forEach(row => {
+        const btns = row.querySelectorAll('.smiley-btn');
+        btns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                btns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+    });
+
+    function submitWorksheet() {
+        const name = document.getElementById('student-name').value || "Hurmatli o'quvchi";
+        const rule = document.getElementById('school-rule').value;
+
+        let evalText = `Salom, ${name}! Maktab hayoti darsi yakunlandi.\n\n`;
+        evalText += `🏫 **Tahlillar:**\n`;
+        if (rule) {
+            evalText += `- Siz taklif qilgan "${rule}" qoidasi maktab muhitini yanada do'stona qiladi. Bog'lovchilardan unumli foydalangansiz.\n`;
+        }
+        evalText += `- Acrostic she'r (Act 2) talablarga javob beradi.\n`;
+        evalText += `\nMaktab darslarini doimo quvnoq va do'stona kayfiyatda o'tishingizni tilaymiz!`;
+
+        document.getElementById('ai-text-box').innerText = evalText;
+        document.getElementById('ai-panel').style.display = 'block';
+        document.getElementById('ai-panel').scrollIntoView({ behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>

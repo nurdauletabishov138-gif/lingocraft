@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eating Out! - Complete Interactive Worksheet</title>
+    <style>
+        :root {
+            --primary: #2b6cb0;
+            --primary-light: #ebf8ff;
+            --accent: #dd6b20;
+            --accent-light: #fffaf0;
+            --success: #48bb78;
+            --gray-bg: #f4f7f9;
+            --border: #cbd5e0;
+            --text: #2d3748;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--gray-bg);
+            margin: 0;
+            padding: 20px;
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        .header-emoji {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            color: var(--primary);
+            text-align: center;
+            margin: 0 0 10px 0;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-size: 32px;
+        }
+
+        .subtitle {
+            color: var(--accent);
+            text-align: center;
+            font-style: italic;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        /* Student Meta Info */
+        .student-info {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+            background: #edf2f7;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .student-info label {
+            font-weight: bold;
+            color: #4a5568;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .student-info input {
+            width: 100%;
+            border: none;
+            border-bottom: 2px solid var(--border);
+            background: transparent;
+            padding: 6px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        .student-info input:focus {
+            outline: none;
+            border-bottom-color: var(--primary);
+        }
+
+        .goal-box {
+            background: var(--accent-light);
+            border-left: 5px solid var(--accent);
+            padding: 18px;
+            margin-bottom: 35px;
+            border-radius: 0 8px 8px 0;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        /* Section Styling */
+        .section-title {
+            background: var(--primary);
+            color: white;
+            padding: 12px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 6px;
+            margin-top: 40px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .instructions {
+            background: var(--primary-light);
+            padding: 15px 20px;
+            border-left: 4px solid #3182ce;
+            font-style: italic;
+            margin-bottom: 20px;
+            border-radius: 0 6px 6px 0;
+        }
+
+        /* Inputs & Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+        }
+
+        th, td {
+            border: 1px solid #e2e8f0;
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f7fafc;
+            color: #4a5568;
+            font-weight: 600;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 15px;
+            box-sizing: border-box;
+            transition: all 0.2s;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.15);
+        }
+
+        /* Activity Specifics */
+        .comic-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .comic-card {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 15px;
+            background: #fdfdfd;
+        }
+
+        .comic-situation {
+            background: #f7fafc;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 15px;
+            min-height: 50px;
+            border-left: 3px solid var(--success);
+        }
+
+        .acrostic-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .acrostic-letter {
+            background: #6b46c1;
+            color: white;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+            border-radius: 4px;
+        }
+
+        .upload-box {
+            border: 2px dashed var(--border);
+            padding: 30px;
+            text-align: center;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #fafafa;
+            margin-bottom: 20px;
+        }
+
+        .upload-box:hover {
+            border-color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        #preview-img {
+            max-width: 100%;
+            max-height: 200px;
+            margin-top: 15px;
+            border-radius: 6px;
+            display: none;
+        }
+
+        /* Self-Assessment Smilies */
+        .rating-container {
+            display: flex;
+            gap: 15px;
+        }
+
+        .smiley {
+            font-size: 24px;
+            cursor: pointer;
+            opacity: 0.4;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+
+        .smiley:hover, .smiley.selected {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+
+        .btn-submit {
+            display: block;
+            width: 100%;
+            background: var(--success);
+            color: white;
+            border: none;
+            padding: 18px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 40px;
+            transition: background 0.2s;
+        }
+
+        .btn-submit:hover {
+            background: #38a169;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header-emoji">🍽️ 🍕 🧑‍🍳 🥤 🍰</div>
+    <h1>Eating Out!</h1>
+    <div class="subtitle">An Interactive Worksheet for Developing Linguacreative Competence</div>
+
+    <!-- Student Meta Data -->
+    <div class="student-info">
+        <div>
+            <label>Name:</label>
+            <input type="text" placeholder="Enter your full name">
+        </div>
+        <div>
+            <label>Class:</label>
+            <input type="text" value="8" placeholder="Class">
+        </div>
+        <div>
+            <label>Date:</label>
+            <input type="date" id="current-date">
+        </div>
+    </div>
+
+    <!-- Goal -->
+    <div class="goal-box">
+        🎯 <strong>Goal of the lesson:</strong> to play with English words, invent new ones, and express your own ideas about restaurants and eating out in a creative way!
+    </div>
+
+    <!-- ACTIVITY 1 -->
+    <div class="section-title">📝 Activity 1 — Picture Word-Web</div>
+    <p class="instructions">Look at each picture. Write the first English word it makes you think of. Then combine two of your words into ONE brand-new invented word (a blend)!</p>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 15%; text-align: center;">Picture</th>
+                <th style="width: 42%;">First word that comes to mind</th>
+                <th style="width: 43%;">Your own new word (blend two ideas!)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="text-align: center; font-size: 28px;">🍽️</td>
+                <td><input type="text" class="input-field" placeholder="e.g., Dinner, Plate..."></td>
+                <td rowspan="5"><textarea class="input-field" rows="10" style="resize: none; height: 100%;" placeholder="Combine your words here...&#10;e.g., Pizza + Cake = Pizcake"></textarea></td>
+            </tr>
+            <tr><td style="text-align: center; font-size: 28px;">🍕</td><td><input type="text" class="input-field" placeholder="e.g., Pizza..."></td></tr>
+            <tr><td style="text-align: center; font-size: 28px;">🧑‍🍳</td><td><input type="text" class="input-field" placeholder="e.g., Chef..."></td></tr>
+            <tr><td style="text-align: center; font-size: 28px;">🥤</td><td><input type="text" class="input-field" placeholder="e.g., Drink..."></td></tr>
+            <tr><td style="text-align: center; font-size: 28px;">🍰</td><td><input type="text" class="input-field" placeholder="e.g., Cake..."></td></tr>
+        </tbody>
+    </table>
+
+    <!-- ACTIVITY 2 -->
+    <div class="section-title">🔗 Activity 2 — Blend It! — Make a New Word</div>
+    <p class="instructions">English speakers often blend two words to create a new one. Blend the word pairs below into a new invented word, then write what it means.</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Word A</th>
+                <th>Word B</th>
+                <th>Your new blended word + meaning</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><b>snack</b></td>
+                <td><b>attack</b></td>
+                <td><input type="text" class="input-field" placeholder="e.g., Snacktack - eating everything quickly when hungry"></td>
+            </tr>
+            <tr>
+                <td><b>menu</b></td>
+                <td><b>mystery</b></td>
+                <td><input type="text" class="input-field" placeholder="Your blend + definition..."></td>
+            </tr>
+            <tr>
+                <td><b>spicy</b></td>
+                <td><b>adventure</b></td>
+                <td><input type="text" class="input-field" placeholder="Your blend + definition..."></td>
+            </tr>
+            <tr>
+                <td><b>food</b></td>
+                <td><b>critic</b></td>
+                <td><input type="text" class="input-field" placeholder="Your blend + definition..."></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- ACTIVITY 3 -->
+    <div class="section-title">💡 Activity 3 — Invent Your Own Food Idiom</div>
+    <p class="instructions">An idiom is a colorful expression whose meaning isn't literal. Invent your OWN idiom connected to food or restaurants, then explain it.</p>
+    <div style="margin-bottom: 15px;">
+        <label style="font-weight: 500;"><b>My idiom:</b></label>
+        <input type="text" class="input-field" style="margin-top: 5px;" placeholder="e.g., As busy as a boiling soup">
+    </div>
+    <div style="margin-bottom: 15px;">
+        <label style="font-weight: 500;"><b>What it means:</b></label>
+        <input type="text" class="input-field" style="margin-top: 5px;" placeholder="Explain the secret meaning...">
+    </div>
+    <div style="margin-bottom: 15px;">
+        <label style="font-weight: 500;"><b>Example sentence using it:</b></label>
+        <input type="text" class="input-field" style="margin-top: 5px;" placeholder="Write a sentence using your idiom...">
+    </div>
+
+    <!-- ACTIVITY 4 -->
+    <div class="section-title">💬 Activity 4 — Comic Strip — Fill the Bubbles</div>
+    <p class="instructions">Choose funny or surprising dialogue for each scene. Be as creative as you can — invent reactions, jokes, or new expressions!</p>
+    <div class="comic-grid">
+        <div class="comic-card">
+            <div class="comic-situation">The waiter just brought you a plate you definitely didn't order.</div>
+            <textarea class="input-field" rows="4" placeholder="Write dialogue..."></textarea>
+        </div>
+        <div class="comic-card">
+            <div class="comic-situation">Your friend bit into the spiciest chili on the menu.</div>
+            <textarea class="input-field" rows="4" placeholder="Write dialogue..."></textarea>
+        </div>
+        <div class="comic-card">
+            <div class="comic-situation">The restaurant surprised our table with a free birthday dessert.</div>
+            <textarea class="input-field" rows="4" placeholder="Write dialogue..."></textarea>
+        </div>
+    </div>
+
+    <!-- ACTIVITY 5 -->
+    <div class="section-title">🎵 Activity 5 — Acrostic Poem — E.A.T.I.N.G. O.U.T.</div>
+    <p class="instructions">Write a word or short phrase for each letter about restaurants, food, or eating out.</p>
+    <div style="background: #f7fafc; padding: 20px; border-radius: 8px;">
+        <div class="acrostic-row"><div class="acrostic-letter">E</div><input type="text" class="input-field" placeholder="e.g., Eating delicious meals..."></div>
+        <div class="acrostic-row"><div class="acrostic-letter">A</div><input type="text" class="input-field"></div>
+        <div class="acrostic-row"><div class="acrostic-letter">T</div><input type="text" class="input-field"></div>
+        <div class="acrostic-row"><div class="acrostic-letter">I</div><input type="text" class="input-field"></div>
+        <div class="acrostic-row"><div class="acrostic-letter">N</div><input type="text" class="input-field"></div>
+        <div class="acrostic-row"><div class="acrostic-letter">G</div><input type="text" class="input-field"></div>
+        <div class="acrostic-row" style="margin-top: 20px;"><div class="acrostic-letter" style="background:#dd6b20;">O</div><input type="text" class="input-field"></div>
+        <div class="acrostic-row"><div class="acrostic-letter" style="background:#dd6b20;">U</div><input type="text" class="input-field"></div>
+        <div class="acrostic-row"><div class="acrostic-letter" style="background:#dd6b20;">T</div><input type="text" class="input-field"></div>
+    </div>
+
+    <!-- ACTIVITY 6 -->
+    <div class="section-title">🏪 Activity 6 — Invent Your Own Restaurant</div>
+    <p class="instructions">Design a menupage for your own invented restaurant. Give it a creative name and invent one signature dish using the connectors below (although, because, so that, not only... but also, as soon as).</p>
+    
+    <div class="upload-box" onclick="document.getElementById('file-input').click()">
+        🎨 Click here to upload or draw your dish/menu template
+        <input type="file" id="file-input" style="display: none;" accept="image/*" onchange="previewImage(event)">
+        <br><img id="preview-img" alt="Dish preview">
+    </div>
+
+    <div style="margin-bottom: 15px;">
+        <label><b>My restaurant's name (invent a word!):</b></label>
+        <input type="text" class="input-field" style="margin-top: 5px;">
+    </div>
+    <div style="margin-bottom: 15px;">
+        <label><b>My signature dish and why it's special:</b></label>
+        <textarea class="input-field" rows="5" style="margin-top: 5px;" placeholder="Use connectors: although... / because... / so that... / not only... but also... / as soon as..."></textarea>
+    </div>
+
+    <!-- ACTIVITY 7 -->
+    <div class="section-title">⭐ Activity 7 — Self-Assessment</div>
+    <p class="instructions">Circle or tick the face that best shows how you feel about each statement.</p>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 60%;">Statement</th>
+                <th style="width: 40%;">How do you feel?</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>I can create new English words by blending two words.</td>
+                <td>
+                    <div class="rating-container" data-id="1">
+                        <span class="smiley" onclick="rate(this, '😞')">😞</span>
+                        <span class="smiley" onclick="rate(this, '😐')">😐</span>
+                        <span class="smiley" onclick="rate(this, '😊')">😊</span>
+                        <span class="smiley" onclick="rate(this, '🤩')">🤩</span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>I can invent my own idiom or expression in English.</td>
+                <td>
+                    <div class="rating-container" data-id="2">
+                        <span class="smiley" onclick="rate(this, '😞')">😞</span>
+                        <span class="smiley" onclick="rate(this, '😐')">😐</span>
+                        <span class="smiley" onclick="rate(this, '😊')">😊</span>
+                        <span class="smiley" onclick="rate(this, '🤩')">🤩</span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>I can write a short creative text (poem / dialogue) in English.</td>
+                <td>
+                    <div class="rating-container" data-id="3">
+                        <span class="smiley" onclick="rate(this, '😞')">😞</span>
+                        <span class="smiley" onclick="rate(this, '😐')">😐</span>
+                        <span class="smiley" onclick="rate(this, '😊')">😊</span>
+                        <span class="smiley" onclick="rate(this, '🤩')">🤩</span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>I enjoyed today's lesson about eating out.</td>
+                <td>
+                    <div class="rating-container" data-id="4">
+                        <span class="smiley" onclick="rate(this, '😞')">😞</span>
+                        <span class="smiley" onclick="rate(this, '😐')">😐</span>
+                        <span class="smiley" onclick="rate(this, '😊')">😊</span>
+                        <span class="smiley" onclick="rate(this, '🤩')">🤩</span>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button class="btn-submit" onclick="saveWorksheet()">Submit & Save Worksheet</button>
+</div>
+
+<script>
+    // Set Current Date Automatically
+    document.getElementById('current-date').valueAsDate = new Date();
+
+    // Image Upload Preview Function
+    function previewImage(event) {
+        const reader = new FileReader();
+        reader.onload = function(){
+            const output = document.getElementById('preview-img');
+            output.src = reader.result;
+            output.style.display = 'block';
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+
+    // Interactive Smiley Selection
+    function rate(element, val) {
+        const parent = element.parentElement;
+        const smileys = parent.getElementsByClassName('smiley');
+        for (let s of smileys) {
+            s.classList.remove('selected');
+        }
+        element.classList.add('selected');
+    }
+
+    // Submit Logic
+    function saveWorksheet() {
+        alert('Excellent job! Your interactive worksheet has been saved successfully.');
+    }
+</script>
+
+</body>
+</html>

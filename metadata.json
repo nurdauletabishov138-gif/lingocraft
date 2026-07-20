@@ -1,0 +1,6 @@
+{
+  "name": "LingoCraft",
+  "description": "An interactive English learning platform featuring linguacreative worksheets, video lessons, and real-time AI teacher feedback.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

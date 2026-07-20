@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐾 AMAZING ANIMALS — Interactive Worksheet</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@500;700&display=swap');
+
+        :root {
+            --bg-color: #fcf9f2;
+            --card-bg: #ffffff;
+            --text-color: #2b1f1d;
+            --primary-color: #d97706;
+            --secondary-color: #b45309;
+            --accent-color: #fbbf24;
+            --success-color: #10b981;
+            --border-color: #fcd34d;
+        }
+
+        * { box-sizing: border-box; font-family: 'Quicksand', sans-serif; }
+        body { background-color: var(--bg-color); margin: 0; padding: 20px; color: var(--text-color); display: flex; justify-content: center; }
+        .container { max-width: 850px; width: 100%; background-color: var(--card-bg); border-radius: 24px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); border: 4px solid #ffffff; }
+        header { text-align: center; margin-bottom: 35px; }
+        .header-decor { font-size: 40px; margin-bottom: 10px; }
+        h1 { font-family: 'Fredoka One', cursive; color: var(--secondary-color); margin: 0; font-size: 38px; }
+        .subtitle { color: #854d0e; font-size: 15px; font-weight: 600; margin-top: 5px; text-transform: uppercase; }
+
+        .meta-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; background-color: #fefbeb; padding: 20px; border-radius: 16px; margin-bottom: 30px; border: 2px solid var(--border-color); }
+        .meta-item { display: flex; flex-direction: column; }
+        .meta-item label { font-weight: 700; font-size: 13px; color: #854d0e; margin-bottom: 6px; text-transform: uppercase; }
+        .meta-item input { padding: 10px 12px; border: 2px solid var(--border-color); border-radius: 10px; font-size: 15px; font-weight: 600; outline: none; background: white; }
+        .meta-item input:focus { border-color: var(--secondary-color); }
+
+        .goal-alert { background-color: #fffbeb; border-left: 6px solid var(--primary-color); padding: 20px; border-radius: 12px; margin-bottom: 35px; display: flex; align-items: center; gap: 15px; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); border-right: 1px solid var(--border-color); }
+        .goal-icon { font-size: 30px; }
+        .goal-text { font-size: 15px; font-weight: 600; line-height: 1.5; margin: 0; }
+
+        .activity-section { background-color: #ffffff; border: 2px solid #fef3c7; border-radius: 20px; padding: 25px; margin-bottom: 30px; }
+        .activity-header { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; border-bottom: 2px dashed #fef3c7; padding-bottom: 15px; }
+        .activity-badge { background-color: var(--secondary-color); color: #ffffff; font-weight: 700; padding: 6px 12px; border-radius: 10px; font-size: 12px; text-transform: uppercase; }
+        .activity-title { font-weight: 700; font-size: 18px; color: var(--text-color); }
+        .activity-desc { font-size: 14px; color: #78350f; margin-bottom: 20px; line-height: 1.5; }
+
+        .text-input { width: 100%; padding: 12px 15px; border: 2px solid #fcd34d; border-radius: 12px; font-size: 15px; font-weight: 600; outline: none; }
+        .text-input:focus { border-color: var(--secondary-color); box-shadow: 0 0 0 3px rgba(180, 83, 9, 0.1); }
+
+        .match-row { display: flex; justify-content: space-between; align-items: center; gap: 20px; margin-bottom: 12px; }
+        .match-term { flex: 1; background-color: #fffbeb; padding: 12px; border-radius: 10px; font-weight: 700; font-size: 14px; border: 1px solid #fcd34d; }
+        .match-input { width: 180px; padding: 10px; border: 2px solid #fcd34d; border-radius: 10px; font-weight: 700; text-align: center; outline: none; }
+
+        .acrostic-container { display: flex; flex-direction: column; gap: 10px; }
+        .acrostic-row { display: flex; align-items: center; gap: 12px; }
+        .acrostic-char { background-color: var(--primary-color); color: white; width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; }
+
+        .canvas-container { border: 2px solid #fcd34d; border-radius: 14px; overflow: hidden; background: white; margin-bottom: 15px; }
+        canvas { display: block; width: 100%; height: 220px; cursor: crosshair; }
+        .canvas-tools { display: flex; justify-content: space-between; align-items: center; background-color: #fffbeb; padding: 10px 15px; border-top: 1px solid #fcd34d; }
+        .color-palette { display: flex; gap: 8px; }
+        .color-btn { width: 24px; height: 24px; border-radius: 50%; border: 2px solid white; cursor: pointer; box-shadow: 0 0 4px rgba(0,0,0,0.2); }
+        .color-btn.active { transform: scale(1.15); box-shadow: 0 0 0 2px var(--secondary-color); }
+        .btn-clear { background-color: #ef4444; color: white; border: none; padding: 6px 12px; border-radius: 8px; font-size: 12px; font-weight: 700; cursor: pointer; }
+
+        .smiley-table { width: 100%; border-collapse: collapse; }
+        .smiley-table td { padding: 15px 10px; border-bottom: 1px solid #fde68a; }
+        .smiley-row { display: flex; gap: 10px; }
+        .smiley-btn { font-size: 24px; background: none; border: none; cursor: pointer; opacity: 0.3; transition: transform 0.2s, opacity 0.2s; }
+        .smiley-btn:hover, .smiley-btn.active { opacity: 1; transform: scale(1.2); }
+
+        .ai-feedback-section { background-color: #fffbeb; border: 2px solid #fcd34d; border-radius: 20px; padding: 25px; margin-top: 35px; display: none; }
+        .ai-header { display: flex; align-items: center; gap: 10px; color: #92400e; font-weight: 700; margin-bottom: 15px; }
+        .ai-text { font-size: 14px; line-height: 1.6; color: #78350f; white-space: pre-wrap; }
+
+        .btn-submit { background-color: var(--secondary-color); color: white; font-size: 18px; font-weight: 700; border: none; width: 100%; padding: 18px; border-radius: 16px; cursor: pointer; box-shadow: 0 5px 15px rgba(180, 83, 9, 0.2); transition: transform 0.2s, background-color 0.2s; margin-top: 20px; }
+        .btn-submit:hover { background-color: #92400e; transform: translateY(-2px); }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="header-decor">🐾 🦁 🦅</div>
+        <h1>AMAZING ANIMALS</h1>
+        <div class="subtitle">Interactive Language & Animal Science Worksheet</div>
+    </header>
+
+    <div class="meta-grid">
+        <div class="meta-item">
+            <label>Name / Ism</label>
+            <input type="text" id="student-name" placeholder="Your name...">
+        </div>
+        <div class="meta-item">
+            <label>Grade / Sinf</label>
+            <input type="text" value="10" id="student-grade" placeholder="Sinf...">
+        </div>
+        <div class="meta-item">
+            <label>Date / Sana</label>
+            <input type="date" id="doc-date">
+        </div>
+    </div>
+
+    <div class="goal-alert">
+        <span class="goal-icon">🐾</span>
+        <p class="goal-text">Learn animal idioms, compile animal science compound words, and draw a brand-new hybrid creature using English descriptions!</p>
+    </div>
+
+    <!-- ACT 1 -->
+    <div class="activity-section">
+        <div class="activity-header">
+            <span class="activity-badge">Act 1</span>
+            <span class="activity-title">Animal Idioms Match</span>
+        </div>
+        <div class="activity-desc">What do these colorful expressions mean? Match them with correct translations/definitions:</div>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+            <div class="match-row">
+                <span class="match-term">1. "To let the cat out of the bag"</span>
+                <input type="text" class="match-input" id="match-1" placeholder="sirlarni ochib qo'yish...">
+            </div>
+            <div class="match-row">
+                <span class="match-term">2. "Night owl"</span>
+                <input type="text" class="match-input" id="match-2" placeholder="tungi qush, kech yotadigan...">
+            </div>
+            <div class="match-row">
+                <span class="match-term">3. "As busy as a bee"</span>
+                <input type="text" class="match-input" id="match-3" placeholder="aridek band, mehnatkash...">
+            </div>
+            <div class="match-row">
+                <span class="match-term">4. "Fish out of water"</span>
+                <input type="text" class="match-input" id="match-4" placeholder="noqulay holat, begona joyda...">
+            </div>
+        </div>
+    </div>
+
+    <!-- ACT 2 -->
+    <div class="activity-section">
+        <div class="activity-header">
+            <span class="activity-badge" style="background-color: var(--primary-color);">Act 2</span>
+            <span class="activity-title">Compound Word Detective</span>
+        </div>
+        <div class="activity-desc">Combine animal science prefix/root words to build 3 compounds (e.g. cold-blooded, warm-blooded, waterproof, wildlife, nocturnal):</div>
+        <div style="display:flex; flex-direction:column; gap:15px;">
+            <input type="text" class="text-input" id="comp-1" placeholder="Compound 1 (e.g., Cold-blooded)">
+            <input type="text" class="text-input" id="comp-2" placeholder="Compound 2...">
+            <input type="text" class="text-input" id="comp-3" placeholder="Compound 3...">
+        </div>
+    </div>
+
+    <!-- ACT 3 -->
+    <div class="activity-section">
+        <div class="activity-header">
+            <span class="activity-badge" style="background-color: #fbbf24; color:#2b1f1d;">Act 3</span>
+            <span class="activity-title">Personification: Animal Interview</span>
+        </div>
+        <div class="activity-desc">Imagine a cheetah or a dolphin talking. Write down its inspiring message about wildlife preservation:</div>
+        <textarea class="text-input" id="interview" rows="4" style="resize:none;" placeholder="Cheetah: 'I run as fast as the wind, but I cannot escape humans. Please protect our wild paths because...'"></textarea>
+    </div>
+
+    <!-- ACT 4 -->
+    <div class="activity-section">
+        <div class="activity-header">
+            <span class="activity-badge" style="background-color: #ec4899;">Act 4</span>
+            <span class="activity-title">Invent Your Hybrid Animal</span>
+        </div>
+        <div class="activity-desc">Draw a hybrid creature (e.g., Eagle + Lion = Ligele) on the digital canvas below!</div>
+        
+        <div class="canvas-container">
+            <canvas id="hybrid-canvas"></canvas>
+            <div class="canvas-tools">
+                <div class="color-palette">
+                    <div class="color-btn active" style="background-color:#78350f;" data-color="#78350f"></div>
+                    <div class="color-btn" style="background-color:#b45309;" data-color="#b45309"></div>
+                    <div class="color-btn" style="background-color:#d97706;" data-color="#d97706"></div>
+                    <div class="color-btn" style="background-color:#3b82f6;" data-color="#3b82f6"></div>
+                    <div class="color-btn" style="background-color:#1e293b;" data-color="#1e293b"></div>
+                </div>
+                <button class="btn-clear" id="clear-btn">Clear Canvas</button>
+            </div>
+        </div>
+        <input type="text" class="text-input" id="hybrid-title" placeholder="Give your hybrid animal a creative scientific name...">
+    </div>
+
+    <!-- ACT 5 -->
+    <div class="activity-section">
+        <div class="activity-header">
+            <span class="activity-badge">Act 5</span>
+            <span class="activity-title">Self-Evaluation</span>
+        </div>
+        <table class="smiley-table">
+            <tbody>
+                <tr>
+                    <td style="font-weight:600; font-size:15px;">I know animal idioms and science compound words.</td>
+                    <td>
+                        <div class="smiley-row">
+                            <button class="smiley-btn">😞</button>
+                            <button class="smiley-btn">😐</button>
+                            <button class="smiley-btn">😊</button>
+                            <button class="smiley-btn">🤩</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-weight:600; font-size:15px;">I can draft creative messages from an animal's perspective.</td>
+                    <td>
+                        <div class="smiley-row">
+                            <button class="smiley-btn">😞</button>
+                            <button class="smiley-btn">😐</button>
+                            <button class="smiley-btn">😊</button>
+                            <button class="smiley-btn">🤩</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button class="btn-submit" onclick="submitWorksheet()">Submit to AI Teacher</button>
+
+    <div class="ai-feedback-section" id="ai-panel">
+        <div class="ai-header">
+            <span>🤖</span>
+            <span>AI Teacher's Animal Science Review</span>
+        </div>
+        <div class="ai-text" id="ai-text-box">Generating...</div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('doc-date').valueAsDate = new Date();
+
+    const canvas = document.getElementById('hybrid-canvas');
+    const ctx = canvas.getContext('2d');
+    let drawing = false;
+    let currentColor = '#78350f';
+
+    function resizeCanvas() {
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width;
+        canvas.height = rect.height;
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    canvas.addEventListener('mousedown', startDraw);
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mouseup', stopDraw);
+    canvas.addEventListener('mouseout', stopDraw);
+
+    canvas.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        const touch = e.touches[0];
+        startDraw({ clientX: touch.clientX, clientY: touch.clientY });
+    });
+    canvas.addEventListener('touchmove', (e) => {
+        e.preventDefault();
+        const touch = e.touches[0];
+        draw({ clientX: touch.clientX, clientY: touch.clientY });
+    });
+    canvas.addEventListener('touchend', stopDraw);
+
+    function startDraw(e) {
+        drawing = true;
+        ctx.beginPath();
+        const rect = canvas.getBoundingClientRect();
+        ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+        ctx.strokeStyle = currentColor;
+        ctx.lineWidth = 3;
+        ctx.lineCap = 'round';
+    }
+
+    function draw(e) {
+        if (!drawing) return;
+        const rect = canvas.getBoundingClientRect();
+        ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+        ctx.stroke();
+    }
+
+    function stopDraw() { drawing = false; }
+
+    document.querySelectorAll('.color-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentColor = btn.getAttribute('data-color');
+        });
+    });
+
+    document.getElementById('clear-btn').addEventListener('click', () => {
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    });
+
+    document.querySelectorAll('.smiley-row').forEach(row => {
+        const btns = row.querySelectorAll('.smiley-btn');
+        btns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                btns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+    });
+
+    function submitWorksheet() {
+        const name = document.getElementById('student-name').value || "Hurmatli o'quvchi";
+        const hTitle = document.getElementById('hybrid-title').value;
+        const msg = document.getElementById('interview').value;
+
+        let evalText = `Ofarin, ${name}! Hayvonot dunyosining til-ijodiy ko'nikmalari darsi yakunlandi.\n\n`;
+        evalText += `🐾 **Ko'nikmalar tahlili:**\n`;
+        if (hTitle) {
+            evalText += `- Siz chizgan va nomlagan "${hTitle}" duragay hayvoni tabiatga oid ilmiy tasavvurlaringizni juda mukammal ochib bergan.\n`;
+        }
+        if (msg.length > 10) {
+            evalText += `- Hayvon nomidan yozilgan murojaatnomada ekologik madaniyat va hayvonot olamini asrashga oid ijtimoiy burch tushunchalari juda chiroyli ifodalangan.\n`;
+        }
+        evalText += `\nLinguacreative va ijtimoiy faollik ko'rsatkichingiz: A'lo!`;
+
+        document.getElementById('ai-text-box').innerText = evalText;
+        document.getElementById('ai-panel').style.display = 'block';
+        document.getElementById('ai-panel').scrollIntoView({ behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>

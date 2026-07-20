@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Useful Websites — Grade 9 Unit 10 Interactive Worksheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0F172A;
+    --paper:#F8FAFC;
+    --paper-alt:#F1F5F9;
+    --teal:#0F766E;
+    --teal-deep:#115E59;
+    --teal-soft:#99F6E4;
+    --gold:#D97706;
+    --coral:#E11D48;
+    --line:#E2E8F0;
+    --shadow: 0 4px 14px rgba(15,118,110,0.06);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(circle at 95% 5%, rgba(153,246,228,0.4), transparent 45%),
+      var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    line-height:1.5;
+    padding-bottom:80px;
+  }
+  h1,h2,h3,.display{font-family:'Fraunces',serif;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+
+  /* ===== Hero ===== */
+  .hero{position:relative; background:linear-gradient(160deg,var(--teal) 0%, var(--teal-deep) 100%); color:var(--paper); padding:52px 6vw 40px; overflow:hidden;}
+  .hero::after{content:""; position:absolute; inset:0; background-image: repeating-linear-gradient(115deg, rgba(255,255,255,0.035) 0 2px, transparent 2px 26px); pointer-events:none;}
+  .eyebrow{display:inline-flex; align-items:center; gap:8px; font-size:12.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--teal-soft); font-weight:600; margin-bottom:14px;}
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);}
+  .hero h1{font-size:clamp(2.2rem,4.6vw,3.7rem); font-weight:900; margin:0 0 10px; line-height:1.03; letter-spacing:-0.01em;}
+  .hero h1 em{font-style:italic; color:var(--teal-soft); font-weight:600;}
+  .hero p.lede{max-width:580px; font-size:16.5px; color:#CCFBF1; margin:0 0 30px;}
+  .meta-strip{display:flex; flex-wrap:wrap; gap:14px; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.14); border-radius:14px; padding:16px 18px;}
+  .meta-field{flex:1 1 160px; min-width:150px;}
+  .meta-field label{display:block; font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--teal-soft); margin-bottom:5px;}
+  .meta-field input{width:100%; background:transparent; border:none; border-bottom:1.5px solid rgba(255,255,255,0.35); color:var(--paper); font-family:'Inter'; font-size:15px; padding:4px 2px; outline:none;}
+  .meta-field input:focus{border-bottom-color:var(--gold);}
+  .meta-field input::placeholder{color:rgba(255,255,255,0.35);}
+
+  /* ===== Trail ===== */
+  .trail-wrap{background:var(--teal-deep); padding:18px 6vw 22px; position:sticky; top:0; z-index:50; box-shadow:0 6px 18px rgba(0,0,0,0.18);}
+  .trail{display:flex; align-items:center; max-width:1040px; margin:0 auto; overflow-x:auto; padding-bottom:2px;}
+  .trail-step{display:flex; align-items:center; flex-shrink:0;}
+  .trail-node{width:34px;height:34px;border-radius:50%; border:2px solid rgba(255,255,255,0.3); display:flex; align-items:center; justify-content:center; font-family:'JetBrains Mono'; font-size:13px; font-weight:600; color:rgba(255,255,255,0.55); background:var(--teal-deep); transition:.35s ease; cursor:pointer; flex-shrink:0;}
+  .trail-node.done{background:var(--teal); border-color:var(--teal); color:#fff;}
+  .trail-node.done::after{content:"✓";}
+  .trail-node.done span{display:none;}
+  .trail-track{width:26px; height:2px; background:rgba(255,255,255,0.2); flex-shrink:0;}
+  .trail-track.done{background:var(--teal);}
+
+  /* ===== Layout ===== */
+  main{max-width:900px; margin:0 auto; padding:0 6vw;}
+  .section{margin-top:56px; scroll-margin-top:100px;}
+  .section-head{display:flex; align-items:baseline; gap:14px; margin-bottom:6px;}
+  .section-num{font-family:'JetBrains Mono'; font-size:13px; font-weight:600; color:#fff; background:var(--teal); padding:3px 9px; border-radius:20px;}
+  .section-head h2{font-size:1.5rem; margin:0; color:var(--teal-deep);}
+  .section-intro{color:#334155; font-size:15px; margin:8px 0 20px; max-width:640px;}
+  .card{background:var(--paper-alt); border:1px solid var(--line); border-radius:16px; padding:26px 28px; box-shadow:var(--shadow);}
+
+  /* Activity 1: Categories */
+  .word-bank{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px;}
+  .word-chip{background:var(--teal-soft); color:var(--teal-deep); font-family:'JetBrains Mono'; font-size:13.5px; padding:6px 12px; border-radius:20px; font-weight:600; cursor:pointer; border:1.5px solid transparent; transition:.15s;}
+  .word-chip:hover{border-color:var(--teal);}
+  .word-chip.used{opacity:.35; text-decoration:line-through; cursor:default;}
+  .hint{font-size:12px; color:#475569; font-style:italic; margin-bottom:16px;}
+
+  .grid-2{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-bottom:18px;}
+  @media(max-width:640px){.grid-2{grid-template-columns:1fr;}}
+  .box-cat{background:#fff; border:1px solid var(--line); border-radius:12px; padding:16px 18px;}
+  .box-cat h3{font-size:14px; color:var(--teal); margin:0 0 10px; text-transform:uppercase; letter-spacing:.05em;}
+  .box-cat input{width:100%; border:none; border-bottom:1.5px dashed var(--teal-soft); background:transparent; padding:6px 2px; font-size:14.5px; font-family:'Inter'; outline:none;}
+  .box-cat input:focus{border-bottom-color:var(--teal);}
+
+  /* Activity 2: Matcher */
+  .match-grid{display:grid; grid-template-columns:1fr 1fr; gap:36px;}
+  @media(max-width:640px){.match-grid{grid-template-columns:1fr;}}
+  .idiom-list, .meaning-list{padding:0;}
+  .idiom-list li, .meaning-list li{margin-bottom:14px; list-style:none;}
+  .idiom-row{display:flex; align-items:center; gap:10px;}
+  .idiom-row .num{font-family:'JetBrains Mono'; font-weight:700; color:var(--teal-deep); background:var(--teal-soft); border-radius:6px; width:24px; height:24px; display:flex;align-items:center;justify-content:center; font-size:12.5px; flex-shrink:0;}
+  .idiom-row select{font-family:'JetBrains Mono'; font-size:13px; border:1.5px solid var(--line); border-radius:6px; padding:3px 6px; background:#fff; color:var(--teal-deep); outline:none;}
+  .idiom-row select:focus{border-color:var(--teal);}
+  .meaning-row{display:flex; gap:10px; align-items:flex-start; font-size:14.5px;}
+  .meaning-row .letter{font-family:'JetBrains Mono'; font-weight:700; color:#fff; background:var(--teal); border-radius:6px; width:22px; height:22px; display:flex; align-items:center; justify-content:center; font-size:12px; flex-shrink:0; margin-top:1px;}
+  .check-answers{margin-top:18px; background:var(--teal); color:#fff; border:none; padding:9px 18px; border-radius:30px; font-weight:600; font-size:13.5px; cursor:pointer; font-family:'Inter';}
+  .check-answers:hover{background:#115e59;}
+  #matchFeedback{font-size:13.5px; margin-top:10px; font-weight:600;}
+
+  /* Activity 3: Internet Idioms */
+  .remix-box{margin-top:24px; background:#fff; border:1.5px solid var(--line); border-radius:12px; padding:18px 20px;}
+  .remix-box label{display:block; font-size:12.5px; text-transform:uppercase; letter-spacing:.05em; color:var(--teal); margin:12px 0 5px; font-weight:600;}
+  .simile-fill{display:flex; flex-wrap:wrap; align-items:center; gap:6px; font-size:14.5px;}
+  .simile-fill input{border:none; border-bottom:1.5px solid var(--line); background:transparent; padding:5px 4px; font-size:14.5px; font-family:'Inter'; outline:none;}
+  .simile-fill input:focus{border-bottom-color:var(--teal);}
+  .simile-fill input.blank{width:160px;}
+
+  /* Activity 4: Web designer studio */
+  .web-card{background:linear-gradient(150deg,#fff,var(--paper-alt));}
+  .web-field{margin-bottom:18px;}
+  .web-field label{display:block; font-weight:600; color:var(--teal-deep); margin-bottom:6px; font-size:14.5px;}
+  .web-field input, .web-field textarea{width:100%; border:1.5px solid var(--line); border-radius:10px; background:#fff; padding:10px 12px; font-size:14.5px; font-family:'Inter'; outline:none; resize:vertical;}
+  .web-field input:focus, .web-field textarea:focus{border-color:var(--teal);}
+
+  /* Activity 5: Custom sketch */
+  .poster-area{display:grid; grid-template-columns:1.1fr 0.9fr; gap:24px;}
+  @media(max-width:640px){.poster-area{grid-template-columns:1fr;}}
+  .sketchpad{background:#fff; border:2px dashed var(--teal); border-radius:14px; aspect-ratio:4/3; position:relative; overflow:hidden; cursor:crosshair;}
+  .sketchpad canvas{width:100%; height:100%; display:block;}
+  .sketch-tools{display:flex; gap:8px; margin-top:10px; align-items:center;}
+  .swatch{width:22px;height:22px;border-radius:50%; border:2px solid #fff; box-shadow:0 0 0 1.5px var(--line); cursor:pointer;}
+  .swatch.active{box-shadow:0 0 0 2px var(--teal-deep);}
+  .sketch-tools button{background:var(--paper); border:1.5px solid var(--line); border-radius:8px; padding:5px 10px; font-size:12.5px; cursor:pointer; font-family:'Inter';}
+  .poster-side{display:flex; flex-direction:column; justify-content:space-between;}
+
+  /* Activity 6: reflection */
+  .reflect-list{display:flex; flex-direction:column; gap:14px;}
+  .reflect-item{display:flex; align-items:flex-start; gap:12px; background:#fff; border:1px solid var(--line); border-radius:10px; padding:12px 14px;}
+  .reflect-item input[type=checkbox]{width:20px; height:20px; accent-color:var(--teal); margin-top:2px; flex-shrink:0; cursor:pointer;}
+  .reflect-item .field-input{border-bottom:1.5px dashed var(--teal-soft); font-size:14px; border:none; background:transparent; outline:none; font-family:'Inter';}
+  .reflect-item label{font-size:14.5px; flex:1;}
+
+  /* Footer */
+  .closing{margin:70px 6vw 0; text-align:center; background:var(--teal-deep); color:var(--paper); border-radius:20px; padding:40px 24px;}
+  .closing h3{font-size:1.6rem; margin:0 0 8px; color:var(--teal-soft);}
+  .closing p{color:#94A3B8; margin:0 0 22px; font-size:14.5px;}
+  .closing button{background:var(--teal); color:#fff; border:none; padding:12px 26px; border-radius:30px; font-weight:700; font-size:14.5px; cursor:pointer; font-family:'Inter';}
+  .closing button:hover{background:#115e59;}
+  #saveMsg{margin-top:12px; font-size:13px; color:var(--teal-soft); min-height:18px;}
+
+  ::selection{background:var(--teal-soft);}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <span class="eyebrow"><span class="dot"></span>Grade 9 · Unit 10 · Useful Websites · pp. 46–49</span>
+  <h1>Useful <em>Websites</em></h1>
+  <p class="lede">An interactive worksheet for deconstructing websites, guessing website types from icon glyphs, learning internet idioms, and designing your own innovative web platform.</p>
+  <div class="meta-strip">
+    <div class="meta-field"><label>Name</label><input type="text" placeholder="Your name"></div>
+    <div class="meta-field"><label>Class</label><input type="text" placeholder="11" value="11"></div>
+    <div class="meta-field"><label>Date</label><input type="text" placeholder="dd / mm / yyyy"></div>
+  </div>
+</header>
+
+<div class="trail-wrap"><div class="trail" id="trail"></div></div>
+
+<main>
+
+  <!-- 1 -->
+  <section class="section" id="s1" data-section="1">
+    <div class="section-head"><span class="section-num">01</span><h2>🌐 Website Feature Sorting</h2></div>
+    <p class="section-intro">Sort these web features and interface items into the correct boxes — then add at least one more of your own to each box.</p>
+    <div class="card">
+      <div class="word-bank" id="wordBank"></div>
+      <p class="hint">Tap a word chip, then tap into the box where you want to place it — or just type your own.</p>
+      <div class="grid-2">
+        <div class="box-cat"><h3>💻 Navigation Elements</h3><input type="text" id="catNav" placeholder="type or tap words…"></div>
+        <div class="box-cat"><h3>📝 Interactive Elements</h3><input type="text" id="catInteractive" placeholder="type or tap words…"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 -->
+  <section class="section" id="s2" data-section="2">
+    <div class="section-head"><span class="section-num">02</span><h2>✨ Website Categories Matcher</h2></div>
+    <p class="section-intro">Match each website type (1–5) with its primary purpose (A–E). Then select one and write a short sentence about your favorite platform.</p>
+    <div class="card">
+      <div class="match-grid">
+        <ol class="idiom-list">
+          <li><div class="idiom-row"><span class="num">1</span> Search Engine <select data-q="1"><option value="">?</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select></div></li>
+          <li><div class="idiom-row"><span class="num">2</span> E-commerce <select data-q="2"><option value="">?</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select></div></li>
+          <li><div class="idiom-row"><span class="num">3</span> Blog <select data-q="3"><option value="">?</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select></div></li>
+          <li><div class="idiom-row"><span class="num">4</span> Social Media <select data-q="4"><option value="">?</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select></div></li>
+          <li><div class="idiom-row"><span class="num">5</span> E-learning <select data-q="5"><option value="">?</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select></div></li>
+        </ol>
+        <ul class="meaning-list">
+          <li><div class="meaning-row"><span class="letter">A</span>An online store to buy and sell physical or digital goods</div></li>
+          <li><div class="meaning-row"><span class="letter">B</span>An educational platform offering online courses and video lectures</div></li>
+          <li><div class="meaning-row"><span class="letter">C</span>A tool to locate information on the World Wide Web</div></li>
+          <li><div class="meaning-row"><span class="letter">D</span>A personal or professional journal with regular articles and posts</div></li>
+          <li><div class="meaning-row"><span class="letter">E</span>A network to connect with friends, share posts, and text in real-time</div></li>
+        </ul>
+      </div>
+      <button class="check-answers" id="checkBtn">Check my matches</button>
+      <div id="matchFeedback"></div>
+
+      <div class="remix-box">
+        <label>My Favorite Platform</label>
+        <input type="text" style="width:100%; border:none; border-bottom:1.5px solid var(--line); background:transparent; padding:7px 2px; font-size:14.5px; font-family:'Inter'; outline:none;" placeholder="Write a sentence e.g., 'I visit this e-learning site daily because it makes programming fun…'">
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section class="section" id="s3" data-section="3">
+    <div class="section-head"><span class="section-num">03</span><h2>💬 Internet Idioms Lab</h2></div>
+    <p class="section-intro">Fill in the blank fields below using the correct tech and internet idioms (e.g. "go viral", "browse the web").</p>
+    <div class="card">
+      <div class="remix-box" style="margin:0;">
+        <label>1. Viral posts</label>
+        <div class="simile-fill">If a video is extremely funny, it might <input type="text" class="blank" placeholder="go viral"> and get millions of views overnight.</div>
+      </div>
+      <div class="remix-box" style="margin-top:14px;">
+        <label>2. General searching</label>
+        <div class="simile-fill">Instead of studying books, students often <input type="text" class="blank" placeholder="surf the net"> to find quick facts.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section class="section" id="s4" data-section="4">
+    <div class="section-head"><span class="section-num">04</span><h2>💻 Web Platform Designer Profile</h2></div>
+    <p class="section-intro">Design your own brand-new web application. Give it an innovative name and describe its key features using at least 4 target web terms from today's lesson.</p>
+    <div class="card web-card">
+      <div class="web-field"><label>✏️ Website name &amp; URL domain</label><input type="text" placeholder="e.g. LearnCraft.com"></div>
+      <div class="web-field"><label>🎯 What is its primary category or purpose?</label><textarea rows="3" placeholder="Describe the purpose of your platform…"></textarea></div>
+      <div class="web-field"><label>✨ What unique interactive elements does it offer?</label><textarea rows="2" placeholder="List 2-3 special interactive tools…"></textarea></div>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section class="section" id="s5" data-section="5">
+    <div class="section-head"><span class="section-num">05</span><h2>🎨 Sketch Your Web Platform Logo</h2></div>
+    <p class="section-intro">Draw a simple logo or homepage sketch for your platform on the left — then write a motivational advertising slogan on the right.</p>
+    <div class="card">
+      <div class="poster-area">
+        <div>
+          <div class="sketchpad"><canvas id="sketchCanvas"></canvas></div>
+          <div class="sketch-tools">
+            <span class="swatch active" style="background:#0F766E" data-color="#0F766E"></span>
+            <span class="swatch" style="background:#E11D48" data-color="#E11D48"></span>
+            <span class="swatch" style="background:#D97706" data-color="#D97706"></span>
+            <span class="swatch" style="background:#115E59" data-color="#115E59"></span>
+            <span class="swatch" style="background:#0F172A" data-color="#0F172A"></span>
+            <button id="clearSketch">Clear</button>
+          </div>
+        </div>
+        <div class="poster-side">
+          <div class="web-field">
+            <label>Platform slogan (wordplay!)</label>
+            <input type="text" placeholder="A catchphrase that rhymes or puns…">
+          </div>
+          <p class="hint">Tip: sketch on the left, write your slogan on the right.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section class="section" id="s6" data-section="6">
+    <div class="section-head"><span class="section-num">06</span><h2>🌟 Reflection Corner</h2></div>
+    <p class="section-intro">A quick check-in on today's web designer session.</p>
+    <div class="card">
+      <div class="reflect-list">
+        <div class="reflect-item"><input type="checkbox"><label>I categorized website features and navigation elements correctly.</label></div>
+        <div class="reflect-item"><input type="checkbox"><label>I matched website types with their dictionary purposes.</label></div>
+        <div class="reflect-item"><input type="checkbox"><label>I designed a custom web application and sketched its official logo.</label></div>
+        <div class="reflect-item"><input type="checkbox" checked disabled style="opacity:.4"><label>The website I visit the most often in my life: <input class="field-input" type="text" placeholder="…" style="margin-top:6px;width:100%;"></label></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div class="closing">
+  <h3>Awesome creative work today, web designer! 🌐</h3>
+  <p>Keep your connections fast, your code clean, and your learning going strong.</p>
+  <button id="saveBtn">Save my answers</button>
+  <div id="saveMsg"></div>
+</div>
+
+<script>
+// ---------- Trail progress ----------
+const sections = [1,2,3,4,5,6];
+const trail = document.getElementById('trail');
+sections.forEach((n,i)=>{
+  const step = document.createElement('div');
+  step.className='trail-step';
+  step.innerHTML = `<div class="trail-node" data-n="${n}"><span>${n}</span></div>` + (i<sections.length-1?'<div class="trail-track" data-track="'+n+'"></div>':'');
+  trail.appendChild(step);
+});
+trail.querySelectorAll('.trail-node').forEach(node=>{
+  node.addEventListener('click',()=> document.getElementById('s'+node.dataset.n).scrollIntoView({behavior:'smooth', block:'start'}));
+});
+function markDone(n, done){
+  const node = trail.querySelector(`.trail-node[data-n="${n}"]`);
+  const track = trail.querySelector(`.trail-track[data-track="${n}"]`);
+  if(node) node.classList.toggle('done', done);
+  if(track) track.classList.toggle('done', done);
+}
+function sectionHasContent(sec){
+  const inputs = sec.querySelectorAll('input[type=text], input:not([type]), textarea');
+  for(const el of inputs){ if(el.value && el.value.trim()!=='') return true; }
+  const boxes = sec.querySelectorAll('input[type=checkbox]:not([disabled])');
+  for(const b of boxes){ if(b.checked) return true; }
+  const sels = sec.querySelectorAll('select');
+  for(const s of sels){ if(s.value) return true; }
+  return false;
+}
+function refreshTrail(){ sections.forEach(n=> markDone(n, sectionHasContent(document.getElementById('s'+n)))); }
+document.querySelectorAll('main input, main textarea, main select').forEach(el=>{
+  el.addEventListener('input', refreshTrail);
+  el.addEventListener('change', refreshTrail);
+});
+refreshTrail();
+
+// ---------- Activity 1: word bank ----------
+const WEB_WORDS = ["search bar","hyperlink","text field","canteen","drop-down menu","login button","slider","rating star","submit icon"];
+const bankEl = document.getElementById('wordBank');
+let lastFocusedInput = document.getElementById('catNav');
+document.querySelectorAll('.box-cat input').forEach(inp=>{
+  inp.addEventListener('focus', ()=> lastFocusedInput = inp);
+});
+function renderBank(){
+  bankEl.innerHTML='';
+  WEB_WORDS.forEach((w)=>{
+    if (w === "canteen") return; // skip school word
+    const chip = document.createElement('span');
+    chip.className='word-chip';
+    chip.textContent = w;
+    chip.addEventListener('click', ()=>{
+      const target = lastFocusedInput || document.getElementById('catNav');
+      target.value = target.value ? target.value + ', ' + w : w;
+      target.focus();
+      chip.classList.add('used');
+      refreshTrail();
+    });
+    bankEl.appendChild(chip);
+  });
+}
+renderBank();
+
+// ---------- Activity 2: adjective matching ----------
+const ANSWER_KEY = {1:'C', 2:'A', 3:'D', 4:'E', 5:'B'};
+document.getElementById('checkBtn').addEventListener('click', ()=>{
+  let correct=0;
+  document.querySelectorAll('select[data-q]').forEach(sel=>{ if(sel.value === ANSWER_KEY[sel.dataset.q]) correct++; });
+  const fb = document.getElementById('matchFeedback');
+  fb.style.color = correct===5 ? '#3F7D5C' : '#B5432A';
+  fb.textContent = correct===5 ? '✓ All 5 correct — nice work!' : `You got ${correct} / 5 correct. Try the others again.`;
+});
+
+// ---------- Activity 5: sketchpad ----------
+const canvas = document.getElementById('sketchCanvas');
+const ctx = canvas.getContext('2d');
+function fitCanvas(){
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width * 2;
+  canvas.height = rect.height * 2;
+  ctx.scale(2,2);
+  ctx.lineCap='round'; ctx.lineJoin='round'; ctx.lineWidth=3.5;
+}
+window.addEventListener('load', fitCanvas);
+window.addEventListener('resize', ()=>{
+  const data = canvas.toDataURL();
+  fitCanvas();
+  const img = new Image();
+  img.onload=()=>ctx.drawImage(img,0,0,canvas.width/2,canvas.height/2);
+  img.src=data;
+});
+let drawing=false, currentColor='#0F766E';
+document.querySelectorAll('.swatch').forEach(s=>{
+  s.addEventListener('click', ()=>{
+    document.querySelectorAll('.swatch').forEach(x=>x.classList.remove('active'));
+    s.classList.add('active');
+    currentColor = s.dataset.color;
+  });
+});
+function getPos(e){
+  const rect = canvas.getBoundingClientRect();
+  const t = e.touches ? e.touches[0] : e;
+  return {x:t.clientX-rect.left, y:t.clientY-rect.top};
+}
+function start(e){ drawing=true; const p=getPos(e); ctx.beginPath(); ctx.moveTo(p.x,p.y); e.preventDefault(); }
+function move(e){ if(!drawing) return; const p=getPos(e); ctx.strokeStyle=currentColor; ctx.lineTo(p.x,p.y); ctx.stroke(); e.preventDefault(); }
+function end(){ drawing=false; }
+canvas.addEventListener('mousedown', start);
+canvas.addEventListener('mousemove', move);
+window.addEventListener('mouseup', end);
+canvas.addEventListener('touchstart', start);
+canvas.addEventListener('touchmove', move);
+canvas.addEventListener('touchend', end);
+document.getElementById('clearSketch').addEventListener('click', ()=> ctx.clearRect(0,0,canvas.width,canvas.height));
+
+// ---------- Save ----------
+document.getElementById('saveBtn').addEventListener('click', ()=>{
+  const data = {};
+  document.querySelectorAll('main input[type=text], main input:not([type]), main textarea').forEach((el,i)=>{ if(el.value) data['field_'+i] = el.value; });
+  document.querySelectorAll('main select').forEach((el,i)=>{ if(el.value) data['select_'+i] = el.value; });
+  document.querySelectorAll('main input[type=checkbox]:not([disabled])').forEach((el,i)=>{ data['check_'+i] = el.checked; });
+  const blob = new Blob([JSON.stringify(data,null,2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'useful-websites-worksheet-answers.json';
+  a.click();
+  document.getElementById('saveMsg').textContent = 'Saved! Your answers were downloaded as a file.';
+});
+</script>
+</body>
+</html>
